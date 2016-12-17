@@ -1,0 +1,7 @@
+{
+    "rules": {
+        // This database is readable and writable by default.
+        ".read": true,
+        ".write": true
+    }
+}

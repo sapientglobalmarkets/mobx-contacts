@@ -1,0 +1,14 @@
+.contactForm {
+    flex: 2;
+    overflow: auto;
+    composes: paddedContent from 'assets/styles/layout.css';
+}
+
+.addressFields {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonBar {
+    margin-top: 26px;
+}

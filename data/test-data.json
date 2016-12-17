@@ -1,0 +1,74 @@
+{
+    "contacts": {
+        "naresh-bhatia": {
+            "name": "Naresh Bhatia",
+            "company": "Publicis.Sapient",
+            "email": "naresh@gmail.com",
+            "phone": "+1 (123) 456-7890",
+            "address": {
+                "street": "100 Main Street",
+                "city": "Boston",
+                "state": "MA",
+                "zip": "02112"
+            },
+            "birthdate": "2000-01-01",
+            "notes": "Know him since birth!"
+        },
+        "pavan-podila": {
+            "name": "Pavan Podila",
+            "company": "Publicis.Sapient",
+            "email": "pavan@gmail.com",
+            "phone": "+1 (123) 123-1234",
+            "address": {
+                "street": "100 Federal Street",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10001"
+            },
+            "birthdate": "2001-12-31",
+            "notes": "JavaScript expert"
+        },
+        "dominic-chambers": {
+            "name": "Dominic Chambers",
+            "company": "Publicis.Sapient",
+            "email": "dominic@gmail.com",
+            "phone": "+44 (207) 123 4567",
+            "address": {
+                "street": "8 Spital Square",
+                "city": "London",
+                "state": "",
+                "zip": "E1 6DU"
+            },
+            "birthdate": "2002-12-31",
+            "notes": "JavaScript expert"
+        },
+        "manish-shanker": {
+            "name": "Manish Shanker",
+            "company": "Publicis.Sapient",
+            "email": "manish@gmail.com",
+            "phone": "+44 (207) 111 2222",
+            "address": {
+                "street": "8 Spital Square",
+                "city": "London",
+                "state": "",
+                "zip": "E1 6DU"
+            },
+            "birthdate": "2003-12-31",
+            "notes": "JavaScript expert"
+        },
+        "vikas-goyal": {
+            "name": "Vikas Goyal",
+            "company": "Publicis.Sapient",
+            "email": "vikas@gmail.com",
+            "phone": "+1 (111) 222-3333",
+            "address": {
+                "street": "100 Federal Street",
+                "city": "New York",
+                "state": "NY",
+                "zip": "10001"
+            },
+            "birthdate": "2004-12-31",
+            "notes": "JavaScript expert"
+        }
+    }
+}
