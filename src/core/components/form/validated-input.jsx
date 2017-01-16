@@ -3,13 +3,13 @@
 import React from 'react';
 import get from 'lodash/get';
 import set from 'lodash/set';
-import DatePicker from 'material-ui/DatePicker';
+import TextField from 'material-ui/TextField';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
 import validate from 'validate.js';
 
 @observer
-export default class DateField extends React.Component {
+export default class ValidatedInput extends React.Component {
 
     // All other properties are pass-through
     static propTypes = {
@@ -17,38 +17,43 @@ export default class DateField extends React.Component {
         attr: React.PropTypes.string.isRequired,
         label: React.PropTypes.string.isRequired,
         constraints: React.PropTypes.object.isRequired,
-        errors: React.PropTypes.object.isRequired
+        errors: React.PropTypes.object.isRequired,
+        type: React.PropTypes.string
     };
 
     static defaultProps = {
-        container: 'inline',
-        locale: 'en-US',
-        autoOk: true
+        type: 'text'
     };
 
     render() {
         let { entity, attr, label, constraints, errors, ...rest } = this.props;
 
         return (
-            <DatePicker {...rest}
+            <TextField {...rest}
                 value={ get(entity, attr) }
                 floatingLabelText={ label }
                 errorText={ errors.get(attr) ? errors.get(attr)[0] : null }
                 onChange={ this.onChange.bind(this) }
-                onBlur={ this.onBlur.bind(this) }
+                onKeyPress={ this.onKeyPress.bind(this) }
+                onBlur={ this.onInputChanged.bind(this) }
             />
         );
     }
 
     @action
-    onChange(event, date) {
+    onChange(event) {
         let { entity, attr } = this.props;
         // Since attribute can be a dotted path, use lodash to set it
-        set(entity, attr, date);
+        set(entity, attr, event.target.value);
+    }
+
+    onKeyPress(event) {
+        // Register input change when Enter key is pressed
+        if (event.charCode === 13) { this.onInputChanged(); }
     }
 
     @action
-    onBlur() {
+    onInputChanged() {
         let { entity, attr, constraints, errors } = this.props;
 
         // Validate and update the error for this field only

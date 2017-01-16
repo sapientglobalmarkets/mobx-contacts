@@ -1,4 +1,4 @@
-export { DateField, InputField } from './components/form';
+export { ValidatedDate, ValidatedInput } from './components/form';
 export { Master, MasterDetail } from './components/master-detail';
 export { ResultPanel } from './components/result-panel';
 export { Shell } from './components/shell';

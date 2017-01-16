@@ -1,2 +1,2 @@
-export DateField from './date-field';
-export InputField from './input-field';
+export ValidatedDate from './validated-date';
+export ValidatedInput from './validated-input';

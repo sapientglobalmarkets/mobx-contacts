@@ -3,7 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { action, map, observable } from 'mobx';
 import { observer } from 'mobx-react';
 import validate from 'validate.js';
-import { DateField, InputField, ResultPanel } from 'core';
+import { ValidatedDate, ValidatedInput, ResultPanel } from 'core';
 
 import styles from './contact-form.css';
 
@@ -90,19 +90,19 @@ export default class ContactForm extends React.Component {
 
                 <ResultPanel result={ result } />
 
-                <InputField entity={contact} attr='id' label='Contact Id' constraints={constraints} errors={errors} fullWidth={true} disabled={isNew ? false : true} />
-                <InputField entity={contact} attr='name' label='Name' constraints={constraints} errors={errors} fullWidth={true} />
-                <InputField entity={contact} attr='company' label='Company' constraints={constraints} errors={errors} fullWidth={true} />
-                <InputField entity={contact} attr='email' label='Email' constraints={constraints} errors={errors} fullWidth={true} />
-                <InputField entity={contact} attr='phone' label='Phone' constraints={constraints} errors={errors} fullWidth={true} />
+                <ValidatedInput entity={contact} attr='id' label='Contact Id' constraints={constraints} errors={errors} fullWidth={true} disabled={isNew ? false : true} />
+                <ValidatedInput entity={contact} attr='name' label='Name' constraints={constraints} errors={errors} fullWidth={true} />
+                <ValidatedInput entity={contact} attr='company' label='Company' constraints={constraints} errors={errors} fullWidth={true} />
+                <ValidatedInput entity={contact} attr='email' label='Email' constraints={constraints} errors={errors} fullWidth={true} />
+                <ValidatedInput entity={contact} attr='phone' label='Phone' constraints={constraints} errors={errors} fullWidth={true} />
                 <div className={styles.addressFields}>
-                    <InputField entity={contact} attr="address.street" label="Street" constraints={constraints} errors={errors} style={{ flex: 4 }} />
-                    <InputField entity={contact} attr="address.city" label="City" constraints={constraints} errors={errors} style={{ flex: 2 }} />
-                    <InputField entity={contact} attr="address.state" label="State" constraints={constraints} errors={errors} style={{ flex: 2 }} />
-                    <InputField entity={contact} attr="address.zip" label="Zip" constraints={constraints} errors={errors} style={{ flex: 1 }} />
+                    <ValidatedInput entity={contact} attr="address.street" label="Street" constraints={constraints} errors={errors} style={{ flex: 4 }} />
+                    <ValidatedInput entity={contact} attr="address.city" label="City" constraints={constraints} errors={errors} style={{ flex: 2 }} />
+                    <ValidatedInput entity={contact} attr="address.state" label="State" constraints={constraints} errors={errors} style={{ flex: 2 }} />
+                    <ValidatedInput entity={contact} attr="address.zip" label="Zip" constraints={constraints} errors={errors} style={{ flex: 1 }} />
                 </div>
-                <DateField entity={contact} attr='birthdate' label='Birthdate' constraints={constraints} errors={errors} fullWidth={true} />
-                <InputField entity={contact} attr='notes' label='Notes' constraints={constraints} errors={errors} fullWidth={true} />
+                <ValidatedDate entity={contact} attr='birthdate' label='Birthdate' constraints={constraints} errors={errors} fullWidth={true} />
+                <ValidatedInput entity={contact} attr='notes' label='Notes' constraints={constraints} errors={errors} fullWidth={true} />
 
                 <div className={ styles.buttonBar }>
                     <RaisedButton label="Save" primary={true} type="submit" />&nbsp;
