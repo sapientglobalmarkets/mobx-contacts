@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { ResultPanel, ValidatedInput } from 'shared/components';
 
-const styleSheet = createStyleSheet('ContactForm', (theme) => ({
+const styleSheet = createStyleSheet('ContactForm', theme => ({
     root: {
         flex: 2,
         overflow: 'auto',
@@ -18,7 +18,7 @@ const styleSheet = createStyleSheet('ContactForm', (theme) => ({
     },
     addressFields: {
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     street: {
         flex: 4,
@@ -68,32 +68,26 @@ class ContactFormBase extends React.Component {
             name: {
                 presence: true
             },
-            company: {
-            },
+            company: {},
             email: {
                 email: true
             },
-            phone: {
-            },
+            phone: {},
             'address.street': {
                 format: {
                     pattern: '^[0-9]+ .+$',
                     message: '^The street must be a number followed by a name'
                 }
             },
-            'address.city': {
-            },
-            'address.state': {
-            },
-            'address.zip': {
-            },
+            'address.city': {},
+            'address.state': {},
+            'address.zip': {},
             birthdate: {
                 datetime: {
                     dateOnly: true
                 }
             },
-            notes: {
-            }
+            notes: {}
         };
     }
 
@@ -106,7 +100,13 @@ class ContactFormBase extends React.Component {
     }
 
     render() {
-        const { classes, entity: contact, isNew, result, onCancel } = this.props;
+        const {
+            classes,
+            entity: contact,
+            isNew,
+            result,
+            onCancel
+        } = this.props;
         const constraints = this.constraints;
         const errors = this.errors;
 
@@ -145,17 +145,93 @@ class ContactFormBase extends React.Component {
                     errors={errors}
                     margin="normal"
                 />
-                <ValidatedInput entity={contact} attr="company" name="company" label="Company" constraints={constraints} errors={errors} margin="normal" />
-                <ValidatedInput entity={contact} attr="email" name="email" label="Email" constraints={constraints} errors={errors} margin="normal" />
-                <ValidatedInput entity={contact} attr="phone" name="phone" label="Phone" constraints={constraints} errors={errors} margin="normal" />
+                <ValidatedInput
+                    entity={contact}
+                    attr="company"
+                    name="company"
+                    label="Company"
+                    constraints={constraints}
+                    errors={errors}
+                    margin="normal"
+                />
+                <ValidatedInput
+                    entity={contact}
+                    attr="email"
+                    name="email"
+                    label="Email"
+                    constraints={constraints}
+                    errors={errors}
+                    margin="normal"
+                />
+                <ValidatedInput
+                    entity={contact}
+                    attr="phone"
+                    name="phone"
+                    label="Phone"
+                    constraints={constraints}
+                    errors={errors}
+                    margin="normal"
+                />
                 <div className={classes.addressFields}>
-                    <ValidatedInput entity={contact} attr="address.street" name="street" label="Street" constraints={constraints} errors={errors} margin="normal" className={classes.street} />
-                    <ValidatedInput entity={contact} attr="address.city" name="city" label="City" constraints={constraints} errors={errors} margin="normal" className={classes.city} />
-                    <ValidatedInput entity={contact} attr="address.state" name="state" label="State" constraints={constraints} errors={errors} margin="normal" className={classes.state} />
-                    <ValidatedInput entity={contact} attr="address.zip" name="zip" label="Zip" constraints={constraints} errors={errors} margin="normal" className={classes.zip} />
+                    <ValidatedInput
+                        entity={contact}
+                        attr="address.street"
+                        name="street"
+                        label="Street"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                        className={classes.street}
+                    />
+                    <ValidatedInput
+                        entity={contact}
+                        attr="address.city"
+                        name="city"
+                        label="City"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                        className={classes.city}
+                    />
+                    <ValidatedInput
+                        entity={contact}
+                        attr="address.state"
+                        name="state"
+                        label="State"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                        className={classes.state}
+                    />
+                    <ValidatedInput
+                        entity={contact}
+                        attr="address.zip"
+                        name="zip"
+                        label="Zip"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                        className={classes.zip}
+                    />
                 </div>
-                <ValidatedInput entity={contact} attr="birthdate" name="birthdate" label="Birthdate" constraints={constraints} errors={errors} margin="normal" />
-                <ValidatedInput entity={contact} attr="notes" name="notes" label="Notes" constraints={constraints} errors={errors} margin="normal" />
+                <ValidatedInput
+                    entity={contact}
+                    attr="birthdate"
+                    name="birthdate"
+                    label="Birthdate"
+                    constraints={constraints}
+                    errors={errors}
+                    margin="normal"
+                />
+                <ValidatedInput
+                    entity={contact}
+                    attr="notes"
+                    name="notes"
+                    label="Notes"
+                    constraints={constraints}
+                    errors={errors}
+                    margin="normal"
+                />
 
                 <div className={classes.buttonBar}>
                     <Button raised color="primary" type="submit">

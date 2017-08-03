@@ -3,7 +3,6 @@ import { DateTimeUtils, StringUtils } from 'shared/utils';
 import { Address } from './address';
 
 export class Contact {
-
     @observable id;
     @observable name;
     @observable company;
@@ -23,7 +22,16 @@ export class Contact {
      * @param {Date} [birthdate]
      * @param {string} notes
      */
-    constructor(id='', name='', company='', email='', phone='', address=null, birthdate=null, notes='') {
+    constructor(
+        id = '',
+        name = '',
+        company = '',
+        email = '',
+        phone = '',
+        address = null,
+        birthdate = null,
+        notes = ''
+    ) {
         // runInAction because constructor cannot be decorated with @action
         runInAction('Construct new Contact', () => {
             this.id = id;
@@ -57,21 +65,40 @@ export class Contact {
             email: StringUtils.sanitizeString(this.email),
             phone: StringUtils.sanitizeString(this.phone),
             address: this.address.toDomainModel(),
-            birthdate: this.birthdate ? DateTimeUtils.dateToISOString(this.birthdate) : null,
+            birthdate: this.birthdate
+                ? DateTimeUtils.dateToISOString(this.birthdate)
+                : null,
             notes: StringUtils.sanitizeString(this.notes)
         };
     }
 
     static toViewModel(id, domainModel) {
-        const { name, company, email, phone, address, birthdate, notes } = domainModel;
-        return new Contact(id, name, company, email, phone, Contact.cloneAddress(address), Contact.cloneDate(birthdate), notes);
+        const {
+            name,
+            company,
+            email,
+            phone,
+            address,
+            birthdate,
+            notes
+        } = domainModel;
+        return new Contact(
+            id,
+            name,
+            company,
+            email,
+            phone,
+            Contact.cloneAddress(address),
+            Contact.cloneDate(birthdate),
+            notes
+        );
     }
 
     static cloneAddress(address) {
         let addressCopy = null;
 
         if (address) {
-            const {street, city, state, zip} = address;
+            const { street, city, state, zip } = address;
             addressCopy = new Address(street, city, state, zip);
         }
 

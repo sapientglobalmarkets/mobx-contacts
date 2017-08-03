@@ -10,7 +10,7 @@ const styleSheet = createStyleSheet('ContactsPage', () => ({
         height: '100%',
         display: 'flex',
         flexDirection: 'column'
-    },
+    }
 }));
 
 @inject('appStore')
@@ -28,19 +28,28 @@ class ContactsPageBase extends React.Component {
     render() {
         const { appStore, classes } = this.props;
         const columnDefs = [
-            { id: 'name', header: 'Name', cellRenderer: contact => contact.name },
-            { id: 'city', header: 'City', cellRenderer: contact => contact.address ? contact.address.city : null }
+            {
+                id: 'name',
+                header: 'Name',
+                cellRenderer: contact => contact.name
+            },
+            {
+                id: 'city',
+                header: 'City',
+                cellRenderer: contact =>
+                    contact.address ? contact.address.city : null
+            }
         ];
 
         return (
             <div className={classes.root}>
                 <Titlebar>MobX Contacts</Titlebar>
                 <MasterDetail
-                    columnDefs={ columnDefs }
-                    entityMap={ appStore.contactStore.contactMap }
-                    createEntity={ () => new Contact() }
-                    masterComponent={ Master }
-                    detailComponent={ ContactForm }
+                    columnDefs={columnDefs}
+                    entityMap={appStore.contactStore.contactMap}
+                    createEntity={() => new Contact()}
+                    masterComponent={Master}
+                    detailComponent={ContactForm}
                 />
             </div>
         );

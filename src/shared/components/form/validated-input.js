@@ -21,7 +21,14 @@ export class ValidatedInput extends React.Component {
     };
 
     render() {
-        const { entity, attr, label, constraints, errors, ...rest } = this.props;
+        const {
+            entity,
+            attr,
+            label,
+            constraints,
+            errors,
+            ...rest
+        } = this.props;
 
         return (
             <TextField

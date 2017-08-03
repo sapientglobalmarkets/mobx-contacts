@@ -2,7 +2,6 @@ import { observable } from 'mobx';
 import { StringUtils } from 'shared/utils';
 
 export class Address {
-
     @observable street;
     @observable city;
     @observable state;
@@ -14,7 +13,7 @@ export class Address {
      * @param {string} state
      * @param {string} zip
      */
-    constructor(street='', city='', state='', zip='') {
+    constructor(street = '', city = '', state = '', zip = '') {
         this.street = street;
         this.city = city;
         this.state = state;
@@ -22,12 +21,7 @@ export class Address {
     }
 
     clone() {
-        return new Address(
-            this.street,
-            this.city,
-            this.state,
-            this.zip
-        );
+        return new Address(this.street, this.city, this.state, this.zip);
     }
 
     toDomainModel() {
@@ -43,8 +37,7 @@ export class Address {
                 state: StringUtils.sanitizeString(this.state),
                 zip: StringUtils.sanitizeString(this.zip)
             };
-        }
-        else {
+        } else {
             return null;
         }
     }
