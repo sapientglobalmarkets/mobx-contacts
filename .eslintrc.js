@@ -6,10 +6,7 @@ module.exports = {
         mocha: true
     },
     globals: {
-        React: true,
-        expect: true,
-        __DEV__: true,
-        sinon: true,
+        expect: true
     },
     parser: 'babel-eslint',
     parserOptions: {
@@ -20,24 +17,18 @@ module.exports = {
         },
         sourceType: 'module'
     },
-    plugins: [
-        'react'
-    ],
-    extends: [
-        'eslint:recommended',
-        'plugin:react/recommended'
-    ],
+    plugins: ['react'],
+    extends: ['eslint:recommended', 'plugin:react/recommended'],
     rules: {
         'arrow-spacing': 'error',
         'block-spacing': 'error',
         'comma-dangle': 'off',
         'comma-spacing': 'error',
         'comma-style': 'error',
-        'curly': 'error',
+        curly: 'error',
         'dot-notation': 'error',
-        'eqeqeq': 'error',
+        eqeqeq: 'error',
         'eol-last': 'error',
-        'indent': ['error', 4, {SwitchCase: 1}],
         'key-spacing': 'error',
         'keyword-spacing': 'error',
         'linebreak-style': ['error', 'unix'],
@@ -46,9 +37,10 @@ module.exports = {
         'no-tabs': 'error',
         'no-trailing-spaces': 'error',
         'no-underscore-dangle': 'error',
+        'no-var': 'error',
         'no-whitespace-before-property': 'error',
-        'quotes': ['error', 'single'],
-        'semi': ['error', 'always'],
+        'prefer-const': 'error',
+        semi: ['error', 'always'],
         'semi-spacing': 'error',
         'space-before-blocks': 'error',
         'space-before-function-paren': ['error', 'never'],

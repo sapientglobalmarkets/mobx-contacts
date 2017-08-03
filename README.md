@@ -1,12 +1,13 @@
 MobX Contacts
 =============
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 <img src="assets/screen-shot.png">
 
 Getting started
 ---------------
 ```bash
-$ npm install <--- substitute with yarn if you prefer it
+$ npm install
 $ npm start
 ```
 

@@ -1,25 +1,16 @@
 {
-    "presets": [
-        ["es2015", {"modules": false}],
-        "react",
-        "stage-1"
-    ],
-    "plugins": [
-        "transform-decorators-legacy",
-        "transform-flow-strip-types"
-    ],
     "env": {
         "development": {
+            "presets": [["es2015", { "modules": false }], "stage-1", "react"],
+            "plugins": ["transform-decorators-legacy"]
+        },
+        "production": {
+            "presets": [["es2015", { "modules": false }], "stage-1", "react"],
+            "plugins": ["transform-decorators-legacy"]
         },
         "test": {
-            "plugins": [
-                [
-                    "__coverage__",
-                    {
-                        "ignore": "*.test.*"
-                    }
-                ]
-            ]
+            "presets": ["es2015", "stage-1", "react"],
+            "plugins": ["transform-decorators-legacy"]
         }
     }
 }

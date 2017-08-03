@@ -1,30 +1,30 @@
 import React from 'react';
-{{#if observer}}
-import {observer, inject} from 'mobx-react';
-{{/if}}
+import { createStyleSheet, withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types';
 
-import styles from './{{dashCase componentName}}.css';
+const styleSheet = createStyleSheet('{{ properCase componentName }}', (theme) => ({
+    root: {
+        padding: theme.spacing.unit
+    }
+}));
 
-{{#if observer}}
-@inject('store')
-@observer
-{{/if}}
-export default class {{ properCase componentName }} extends React.Component {
-
-    static defaultProps = {
-        dummy: '',
-    };
+class {{ properCase componentName }}Base extends React.Component {
 
     static propTypes = {
-        dummy: React.PropTypes.string,
+        dummy: PropTypes.string
     };
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <div className={ styles.{{camelCase componentName}} }>
-                <h2>{{ properCase componentName }}</h2>
+            <div className={classes.root}>
+                <Typography type="title">{{ properCase componentName }}</Typography>
             </div>
         );
     }
 
 }
+
+export const {{ properCase componentName }} = withStyles(styleSheet)({{ properCase componentName }}Base);
