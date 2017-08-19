@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Table, {
     TableBody,
     TableCell,
@@ -13,7 +13,7 @@ import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { BusyIndicator } from 'shared/components';
 
-const styleSheet = createStyleSheet('Master', theme => ({
+const styles = theme => ({
     root: {
         flex: 1,
         position: 'relative', // keeps the add button in fixed location
@@ -32,7 +32,7 @@ const styleSheet = createStyleSheet('Master', theme => ({
         right: '30px',
         bottom: '20px'
     }
-}));
+});
 
 @observer
 class MasterBase extends React.Component {
@@ -119,4 +119,4 @@ class MasterBase extends React.Component {
     }
 }
 
-export const Master = withStyles(styleSheet)(MasterBase);
+export const Master = withStyles(styles)(MasterBase);

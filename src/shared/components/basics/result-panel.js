@@ -1,9 +1,9 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
-const styleSheet = createStyleSheet('ResultPanel', theme => ({
+const styles = theme => ({
     root: theme.mixins.gutters({
         paddingTop: 16,
         paddingBottom: 16,
@@ -13,7 +13,7 @@ const styleSheet = createStyleSheet('ResultPanel', theme => ({
     error: {
         color: theme.palette.error[500]
     }
-}));
+});
 
 /**
  * @param result: Example: { code: 'error', message: 'No Internet connection' }
@@ -35,4 +35,4 @@ function ResultPanelBase({ classes, result }) {
     );
 }
 
-export const ResultPanel = withStyles(styleSheet)(ResultPanelBase);
+export const ResultPanel = withStyles(styles)(ResultPanelBase);

@@ -1,10 +1,10 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { ContactsPage } from './features';
 // import DevTools from 'mobx-react-devtools';
 
-const styleSheet = createStyleSheet('Shell', theme => ({
+const styles = theme => ({
     '@global': {
         html: {
             height: '100%',
@@ -35,7 +35,7 @@ const styleSheet = createStyleSheet('Shell', theme => ({
     root: {
         height: '100%'
     }
-}));
+});
 
 class ShellBase extends React.Component {
     render() {
@@ -52,4 +52,4 @@ class ShellBase extends React.Component {
     }
 }
 
-export const Shell = withRouter(withStyles(styleSheet)(ShellBase));
+export const Shell = withRouter(withStyles(styles)(ShellBase));

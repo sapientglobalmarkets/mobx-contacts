@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'material-ui/Button';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import { action, observable, ObservableMap } from 'mobx';
 import { observer } from 'mobx-react';
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { ResultPanel, ValidatedInput } from 'shared/components';
 
-const styleSheet = createStyleSheet('ContactForm', theme => ({
+const styles = theme => ({
     root: {
         flex: 2,
         overflow: 'auto',
@@ -38,7 +38,7 @@ const styleSheet = createStyleSheet('ContactForm', theme => ({
     buttonBar: {
         marginTop: '26px'
     }
-}));
+});
 
 @observer
 class ContactFormBase extends React.Component {
@@ -262,4 +262,4 @@ class ContactFormBase extends React.Component {
     };
 }
 
-export const ContactForm = withStyles(styleSheet)(ContactFormBase);
+export const ContactForm = withStyles(styles)(ContactFormBase);

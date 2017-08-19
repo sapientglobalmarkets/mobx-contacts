@@ -1,16 +1,15 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 
-const styleSheet = createStyleSheet('{{ properCase componentName }}', (theme) => ({
+const styles = theme => ({
     root: {
         padding: theme.spacing.unit
     }
-}));
+});
 
 class {{ properCase componentName }}Base extends React.Component {
-
     static propTypes = {
         dummy: PropTypes.string
     };
@@ -24,7 +23,6 @@ class {{ properCase componentName }}Base extends React.Component {
             </div>
         );
     }
-
 }
 
-export const {{ properCase componentName }} = withStyles(styleSheet)({{ properCase componentName }}Base);
+export const {{ properCase componentName }} = withStyles(styles)({{ properCase componentName }}Base);

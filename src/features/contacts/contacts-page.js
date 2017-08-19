@@ -1,17 +1,17 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { inject } from 'mobx-react';
 import { Master, MasterDetail, Titlebar } from 'shared/components';
 import { Contact } from 'shared/domain';
 import { ContactForm } from './contact-form';
 
-const styleSheet = createStyleSheet('ContactsPage', () => ({
+const styles = {
     root: {
         height: '100%',
         display: 'flex',
         flexDirection: 'column'
     }
-}));
+};
 
 @inject('appStore')
 class ContactsPageBase extends React.Component {
@@ -56,4 +56,4 @@ class ContactsPageBase extends React.Component {
     }
 }
 
-export const ContactsPage = withStyles(styleSheet)(ContactsPageBase);
+export const ContactsPage = withStyles(styles)(ContactsPageBase);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { CircularProgress } from 'material-ui/Progress';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('BusyIndicator', () => ({
+const styles = {
     root: {
         flex: 1,
         display: 'flex',
@@ -10,7 +10,7 @@ const styleSheet = createStyleSheet('BusyIndicator', () => ({
         justifyContent: 'center',
         alignItems: 'center'
     }
-}));
+};
 
 function BusyIndicatorBase({ classes }) {
     return (
@@ -20,4 +20,4 @@ function BusyIndicatorBase({ classes }) {
     );
 }
 
-export const BusyIndicator = withStyles(styleSheet)(BusyIndicatorBase);
+export const BusyIndicator = withStyles(styles)(BusyIndicatorBase);

@@ -1,17 +1,17 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { action, observable, runInAction } from 'mobx';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { VerticalDivider } from 'shared/components';
 
-const styleSheet = createStyleSheet('MasterDetail', () => ({
+const styles = {
     root: {
         flex: 1,
         display: 'flex',
         flexDirection: 'row'
     }
-}));
+};
 
 @observer
 class MasterDetailBase extends React.Component {
@@ -129,4 +129,4 @@ class MasterDetailBase extends React.Component {
     };
 }
 
-export const MasterDetail = withStyles(styleSheet)(MasterDetailBase);
+export const MasterDetail = withStyles(styles)(MasterDetailBase);
