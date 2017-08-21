@@ -8,7 +8,7 @@ import createPalette from 'material-ui/styles/palette';
 import createMuiTheme from 'material-ui/styles/theme';
 import createTypography from 'material-ui/styles/typography';
 import { Provider } from 'mobx-react';
-import { appStore } from 'shared/stores/app.store';
+import { contactStore } from 'shared/stores/contact.store';
 import { Shell } from './shell';
 
 export class App extends React.Component {
@@ -25,10 +25,11 @@ export class App extends React.Component {
         });
 
         const theme = createMuiTheme({ palette, typography });
+        const stores = { contactStore };
 
         return (
             <MuiThemeProvider theme={theme}>
-                <Provider appStore={appStore}>
+                <Provider {...stores}>
                     <Router>
                         <Shell />
                     </Router>

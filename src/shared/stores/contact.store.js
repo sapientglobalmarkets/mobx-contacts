@@ -1,7 +1,7 @@
 import { EntityMap } from 'shared/adapters';
 import { Contact } from 'shared/domain';
 
-export class ContactStore {
+class ContactStore {
     constructor() {
         this.contactMap = new EntityMap(Contact.toViewModel);
     }
@@ -14,3 +14,5 @@ export class ContactStore {
         this.contactMap.stopListening();
     }
 }
+
+export const contactStore = new ContactStore();

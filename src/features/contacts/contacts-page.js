@@ -13,20 +13,20 @@ const styles = {
     }
 };
 
-@inject('appStore')
+@inject('contactStore')
 class ContactsPageBase extends React.Component {
     componentDidMount() {
-        const { appStore } = this.props;
-        appStore.contactStore.startListening();
+        const { contactStore } = this.props;
+        contactStore.startListening();
     }
 
     componentWillUnmount() {
-        const { appStore } = this.props;
-        appStore.contactStore.stopListening();
+        const { contactStore } = this.props;
+        contactStore.stopListening();
     }
 
     render() {
-        const { appStore, classes } = this.props;
+        const { contactStore, classes } = this.props;
         const columnDefs = [
             {
                 id: 'name',
@@ -46,7 +46,7 @@ class ContactsPageBase extends React.Component {
                 <Titlebar>MobX Contacts</Titlebar>
                 <MasterDetail
                     columnDefs={columnDefs}
-                    entityMap={appStore.contactStore.contactMap}
+                    entityMap={contactStore.contactMap}
                     createEntity={() => new Contact()}
                     masterComponent={Master}
                     detailComponent={ContactForm}
