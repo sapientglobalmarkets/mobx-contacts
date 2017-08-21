@@ -1,5 +1,5 @@
 import { observable, runInAction } from 'mobx';
-import { DateTimeUtils, StringUtils } from 'shared/utils';
+import { StringUtils } from 'shared/utils';
 import { Address } from './address';
 
 export class Contact {
@@ -9,7 +9,9 @@ export class Contact {
     @observable email;
     @observable phone;
     @observable address;
-    @observable birthdate;
+    @observable lastContacted;
+    @observable industry;
+    @observable yearsOfExperience;
     @observable notes;
 
     /**
@@ -19,7 +21,9 @@ export class Contact {
      * @param {string} email
      * @param {string} phone
      * @param {Address} [address]
-     * @param {Date} [birthdate]
+     * @param {Date} [lastContacted]
+     * @param {IndustryType} [industry]
+     * @param {number} [yearsOfExperience]
      * @param {string} notes
      */
     constructor(
@@ -29,18 +33,22 @@ export class Contact {
         email = '',
         phone = '',
         address = null,
-        birthdate = null,
+        lastContacted = null,
+        industry = null,
+        yearsOfExperience = null,
         notes = ''
     ) {
         // runInAction because constructor cannot be decorated with @action
-        runInAction('Construct new Contact', () => {
+        runInAction(() => {
             this.id = id;
             this.name = name;
             this.company = company;
             this.email = email;
             this.phone = phone;
             this.address = address ? address : new Address();
-            this.birthdate = birthdate;
+            this.lastContacted = lastContacted;
+            this.industry = industry;
+            this.yearsOfExperience = yearsOfExperience;
             this.notes = notes;
         });
     }
@@ -53,7 +61,9 @@ export class Contact {
             this.email,
             this.phone,
             this.address.clone(),
-            this.birthdate,
+            this.lastContacted,
+            this.industry,
+            this.yearsOfExperience,
             this.notes
         );
     }
@@ -65,9 +75,11 @@ export class Contact {
             email: StringUtils.sanitizeString(this.email),
             phone: StringUtils.sanitizeString(this.phone),
             address: this.address.toDomainModel(),
-            birthdate: this.birthdate
-                ? DateTimeUtils.dateToISOString(this.birthdate)
+            lastContacted: this.lastContacted
+                ? this.lastContacted.toISOString()
                 : null,
+            industry: this.industry,
+            yearsOfExperience: this.yearsOfExperience,
             notes: StringUtils.sanitizeString(this.notes)
         };
     }
@@ -79,7 +91,9 @@ export class Contact {
             email,
             phone,
             address,
-            birthdate,
+            lastContacted,
+            industry,
+            yearsOfExperience,
             notes
         } = domainModel;
         return new Contact(
@@ -89,7 +103,9 @@ export class Contact {
             email,
             phone,
             Contact.cloneAddress(address),
-            Contact.cloneDate(birthdate),
+            lastContacted ? new Date(lastContacted) : null,
+            industry,
+            yearsOfExperience,
             notes
         );
     }
@@ -103,15 +119,5 @@ export class Contact {
         }
 
         return addressCopy;
-    }
-
-    static cloneDate(date) {
-        let dateCopy = null;
-
-        if (date) {
-            dateCopy = DateTimeUtils.ISOStringToDate(date);
-        }
-
-        return dateCopy;
     }
 }

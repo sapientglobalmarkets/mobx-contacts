@@ -11,7 +11,7 @@
                 "state": "MA",
                 "zip": "02112"
             },
-            "birthdate": "2000-01-01",
+            "lastContacted": "2016-05-02T00:00:00-04:00",
             "notes": "Know him since birth!"
         },
         "pavan-podila": {
@@ -25,7 +25,7 @@
                 "state": "NY",
                 "zip": "10001"
             },
-            "birthdate": "2001-12-31",
+            "lastContacted": "2016-05-03T00:00:00-04:00",
             "notes": "JavaScript expert"
         },
         "dominic-chambers": {
@@ -39,7 +39,7 @@
                 "state": "",
                 "zip": "E1 6DU"
             },
-            "birthdate": "2002-12-31",
+            "lastContacted": "2016-05-04T00:00:00-04:00",
             "notes": "JavaScript expert"
         },
         "manish-shanker": {
@@ -53,7 +53,7 @@
                 "state": "",
                 "zip": "E1 6DU"
             },
-            "birthdate": "2003-12-31",
+            "lastContacted": "2016-05-05T00:00:00-04:00",
             "notes": "JavaScript expert"
         },
         "vikas-goyal": {
@@ -67,7 +67,7 @@
                 "state": "NY",
                 "zip": "10001"
             },
-            "birthdate": "2004-12-31",
+            "lastContacted": "2016-05-06T00:00:00-04:00",
             "notes": "JavaScript expert"
         }
     }
