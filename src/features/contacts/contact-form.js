@@ -102,8 +102,7 @@ class ContactFormBase extends React.Component {
                 numericality: {
                     onlyInteger: true,
                     greaterThanOrEqualTo: 0,
-                    lessThanOrEqualTo: 50,
-                    notEven: 'Must be a number between 0 and 50'
+                    lessThanOrEqualTo: 50
                 }
             },
             notes: {}
