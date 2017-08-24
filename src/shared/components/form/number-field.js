@@ -45,6 +45,7 @@ export class NumberField extends React.Component {
                 type="number"
                 value={numStr}
                 error={errorText ? true : false}
+                helperText={errorText ? errorText : null}
                 onChange={event => {
                     this.setState({ numStr: event.target.value });
                 }}

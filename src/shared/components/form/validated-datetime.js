@@ -38,7 +38,8 @@ export class ValidatedDateTime extends React.Component {
                 timezone={timezone}
                 hideTimezone={true}
                 label={label}
-                errorText={errors.get(attr) ? errors.get(attr)[0] : null}
+                error={errors.get(attr) ? true : false}
+                helperText={errors.get(attr) ? errors.get(attr)[0] : null}
                 onChange={this.onChange}
                 {...rest}
             />

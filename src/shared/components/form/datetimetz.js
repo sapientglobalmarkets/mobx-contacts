@@ -109,6 +109,7 @@ class DateTimeTzBase extends React.Component {
                     value={datePart}
                     label={label}
                     error={errorText ? true : false}
+                    helperText={errorText ? errorText : null}
                     className={classes.dateStyle}
                     placeholder="YYYY-MM-DD"
                     margin="normal"

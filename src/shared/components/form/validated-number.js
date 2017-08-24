@@ -34,7 +34,8 @@ export class ValidatedNumber extends React.Component {
             <NumberField
                 num={get(entity, attr)}
                 label={label}
-                errorText={errors.get(attr) ? errors.get(attr)[0] : null}
+                error={errors.get(attr) ? true : false}
+                helperText={errors.get(attr) ? errors.get(attr)[0] : null}
                 onChange={this.onChange}
                 {...rest}
             />

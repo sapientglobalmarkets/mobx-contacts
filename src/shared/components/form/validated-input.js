@@ -35,6 +35,7 @@ export class ValidatedInput extends React.Component {
                 value={get(entity, attr)}
                 label={label}
                 error={errors.get(attr) ? true : false}
+                helperText={errors.get(attr) ? errors.get(attr)[0] : null}
                 onChange={this.onChange}
                 onKeyPress={this.onKeyPress}
                 onBlur={this.onInputChanged}
