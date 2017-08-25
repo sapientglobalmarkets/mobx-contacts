@@ -1,4 +1,4 @@
-import { observable, runInAction } from 'mobx';
+import { action, observable, runInAction } from 'mobx';
 import { StringUtils } from 'shared/utils';
 import { Address } from './address';
 
@@ -67,6 +67,11 @@ export class Contact {
             this.notes
         );
     }
+
+    @action
+    onNameChange = event => {
+        this.name = event.target.value;
+    };
 
     toDomainModel() {
         return {

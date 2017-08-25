@@ -2,11 +2,13 @@ import React from 'react';
 import values from 'lodash/values';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import { action, observable, ObservableMap } from 'mobx';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import {
+    Field,
     ResultPanel,
     ValidatedDateTime,
     ValidatedInput,
@@ -155,11 +157,21 @@ class ContactFormBase extends React.Component {
                         disabled={isNew ? false : true}
                         margin="normal"
                     />
+                    <Field
+                        component={TextField}
+                        attr="name"
+                        value={contact.name}
+                        name="name"
+                        label="Name (Using Field)"
+                        errors={errors}
+                        margin="normal"
+                        onChange={contact.onNameChange}
+                    />
                     <ValidatedInput
                         entity={contact}
                         attr="name"
                         name="name"
-                        label="Name"
+                        label="Name (Using ValidatedInput)"
                         constraints={constraints}
                         errors={errors}
                         margin="normal"

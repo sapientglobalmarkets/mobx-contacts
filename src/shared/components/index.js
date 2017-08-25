@@ -4,6 +4,7 @@ export { Titlebar } from './basics/titlebar';
 export { VerticalDivider } from './basics/vertical-divider';
 
 export { DateTimeTz } from './form/datetimetz';
+export { Field } from './form/field';
 export { NumberField } from './form/number-field';
 export { ValidatedDateTime } from './form/validated-datetime';
 export { ValidatedInput } from './form/validated-input';
