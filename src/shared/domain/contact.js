@@ -69,8 +69,13 @@ export class Contact {
     }
 
     @action
-    onNameChange = event => {
-        this.name = event.target.value;
+    setName = name => {
+        this.name = name;
+    };
+
+    @action
+    setYearsOfExperience = yearsOfExperience => {
+        this.yearsOfExperience = yearsOfExperience;
     };
 
     toDomainModel() {

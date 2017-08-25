@@ -1,21 +1,13 @@
 import React from 'react';
-import values from 'lodash/values';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import { action, observable, ObservableMap } from 'mobx';
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
-import {
-    Field,
-    ResultPanel,
-    ValidatedDateTime,
-    ValidatedInput,
-    ValidatedNumber,
-    ValidatedSelect
-} from 'shared/components';
-import { IndustryType } from 'shared/domain';
+import { Field, ResultPanel } from 'shared/components';
 
 const styles = theme => ({
     root: {
@@ -27,34 +19,12 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column'
     },
-    row: {
-        display: 'flex',
-        flexDirection: 'row'
-    },
-    street: {
-        flex: 4,
-        marginRight: theme.spacing.unit * 2
-    },
-    city: {
-        flex: 2,
-        marginRight: theme.spacing.unit * 2
-    },
-    state: {
-        flex: 2,
-        marginRight: theme.spacing.unit * 2
-    },
-    zip: {
-        flex: 1
-    },
-    industry: {
-        width: 250,
-        marginRight: theme.spacing.unit * 2
-    },
     buttonBar: {
         marginTop: '26px'
     }
 });
 
+@observer
 class ContactFormBase extends React.Component {
     static propTypes = {
         entity: PropTypes.object,
@@ -71,43 +41,16 @@ class ContactFormBase extends React.Component {
     constructor(props) {
         super(props);
         this.constraints = {
-            id: {
-                presence: true,
-                format: {
-                    pattern: '^[a-zA-Z0-9-]+',
-                    message:
-                        '^Id can contain only alphanumeric characters and dashes (-)'
-                }
-            },
             name: {
                 presence: true
             },
-            company: {},
-            email: {
-                email: true
-            },
-            phone: {},
-            'address.street': {
-                format: {
-                    pattern: '^[0-9]+ .+$',
-                    message: '^The street must be a number followed by a name'
-                }
-            },
-            'address.city': {},
-            'address.state': {},
-            'address.zip': {},
-            lastContacted: {
-                datetime: true
-            },
-            industry: {},
             yearsOfExperience: {
                 numericality: {
                     onlyInteger: true,
                     greaterThanOrEqualTo: 0,
                     lessThanOrEqualTo: 50
                 }
-            },
-            notes: {}
+            }
         };
     }
 
@@ -127,7 +70,6 @@ class ContactFormBase extends React.Component {
             result,
             onCancel
         } = this.props;
-        const constraints = this.constraints;
         const errors = this.errors;
 
         if (!contact) {
@@ -147,141 +89,31 @@ class ContactFormBase extends React.Component {
 
                     <ResultPanel result={result} />
 
-                    <ValidatedInput
-                        entity={contact}
-                        attr="id"
-                        name="id"
-                        label="Id"
-                        constraints={constraints}
-                        errors={errors}
-                        disabled={isNew ? false : true}
+                    <Field
+                        component={TextField}
+                        value={contact.name}
+                        name="name"
+                        label="Name"
+                        error={errors.get('name') ? true : false}
+                        helperText={
+                            errors.get('name') ? errors.get('name')[0] : null
+                        }
                         margin="normal"
+                        onChange={this.onNameChange}
                     />
                     <Field
                         component={TextField}
-                        attr="name"
-                        value={contact.name}
-                        name="name"
-                        label="Name (Using Field)"
-                        errors={errors}
+                        value={contact.yearsOfExperience}
+                        name="yearsOfExperience"
+                        label="Years of Experience"
+                        error={errors.get('yearsOfExperience') ? true : false}
+                        helperText={
+                            errors.get('yearsOfExperience')
+                                ? errors.get('yearsOfExperience')[0]
+                                : null
+                        }
                         margin="normal"
-                        onChange={contact.onNameChange}
-                    />
-                    <ValidatedInput
-                        entity={contact}
-                        attr="name"
-                        name="name"
-                        label="Name (Using ValidatedInput)"
-                        constraints={constraints}
-                        errors={errors}
-                        margin="normal"
-                    />
-                    <ValidatedInput
-                        entity={contact}
-                        attr="company"
-                        name="company"
-                        label="Company"
-                        constraints={constraints}
-                        errors={errors}
-                        margin="normal"
-                    />
-                    <ValidatedInput
-                        entity={contact}
-                        attr="email"
-                        name="email"
-                        label="Email"
-                        constraints={constraints}
-                        errors={errors}
-                        margin="normal"
-                    />
-                    <ValidatedInput
-                        entity={contact}
-                        attr="phone"
-                        name="phone"
-                        label="Phone"
-                        constraints={constraints}
-                        errors={errors}
-                        margin="normal"
-                    />
-                    <div className={classes.row}>
-                        <ValidatedInput
-                            entity={contact}
-                            attr="address.street"
-                            name="street"
-                            label="Street"
-                            constraints={constraints}
-                            errors={errors}
-                            margin="normal"
-                            className={classes.street}
-                        />
-                        <ValidatedInput
-                            entity={contact}
-                            attr="address.city"
-                            name="city"
-                            label="City"
-                            constraints={constraints}
-                            errors={errors}
-                            margin="normal"
-                            className={classes.city}
-                        />
-                        <ValidatedInput
-                            entity={contact}
-                            attr="address.state"
-                            name="state"
-                            label="State"
-                            constraints={constraints}
-                            errors={errors}
-                            margin="normal"
-                            className={classes.state}
-                        />
-                        <ValidatedInput
-                            entity={contact}
-                            attr="address.zip"
-                            name="zip"
-                            label="Zip"
-                            constraints={constraints}
-                            errors={errors}
-                            margin="normal"
-                            className={classes.zip}
-                        />
-                    </div>
-                    <ValidatedDateTime
-                        entity={contact}
-                        attr="lastContacted"
-                        label="Last Contacted"
-                        timezone="America/New_York"
-                        constraints={constraints}
-                        errors={errors}
-                    />
-                    <div className={classes.row}>
-                        <ValidatedSelect
-                            className={classes.industry}
-                            entity={contact}
-                            attr="industry"
-                            label="Industry"
-                            options={values(IndustryType)}
-                            isNullable={true}
-                            constraints={constraints}
-                            errors={errors}
-                        />
-                        <ValidatedNumber
-                            entity={contact}
-                            attr="yearsOfExperience"
-                            name="yearsOfExperience"
-                            label="Years of Experience"
-                            constraints={constraints}
-                            errors={errors}
-                            margin="normal"
-                        />
-                    </div>
-                    <ValidatedInput
-                        entity={contact}
-                        attr="notes"
-                        name="notes"
-                        label="Notes"
-                        constraints={constraints}
-                        errors={errors}
-                        margin="normal"
+                        onChange={this.onYearsOfExperience}
                     />
 
                     <div className={classes.buttonBar}>
@@ -296,6 +128,14 @@ class ContactFormBase extends React.Component {
             </div>
         );
     }
+
+    onNameChange = event => {
+        this.props.entity.setName(event.target.value);
+    };
+
+    onYearsOfExperience = event => {
+        this.props.entity.setYearsOfExperience(event.target.value);
+    };
 
     @action
     onSubmit = event => {
