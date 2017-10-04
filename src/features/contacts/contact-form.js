@@ -1,13 +1,12 @@
 import React from 'react';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
-import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import { action, observable, ObservableMap } from 'mobx';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
-import { Field, ResultPanel } from 'shared/components';
+import { Field, NumberInput, ResultPanel, TextInput } from 'shared/components';
 
 const styles = theme => ({
     root: {
@@ -23,6 +22,10 @@ const styles = theme => ({
         marginTop: '26px'
     }
 });
+
+const FIELD_ID = 'id';
+const FIELD_NAME = 'name';
+const FIELD_YEARS_OF_EXPERIENCE = 'yearsOfExperience';
 
 @observer
 class ContactFormBase extends React.Component {
@@ -41,6 +44,14 @@ class ContactFormBase extends React.Component {
     constructor(props) {
         super(props);
         this.constraints = {
+            id: {
+                presence: true,
+                format: {
+                    pattern: '^[a-zA-Z0-9-]+',
+                    message:
+                        '^Id can contain only alphanumeric characters and dashes (-)'
+                }
+            },
             name: {
                 presence: true
             },
@@ -90,31 +101,52 @@ class ContactFormBase extends React.Component {
                     <ResultPanel result={result} />
 
                     <Field
-                        component={TextField}
+                        value={contact.id}
+                        name="id"
+                        label="Id"
+                        error={errors.get(FIELD_ID) ? true : false}
+                        helperText={
+                            errors.get(FIELD_ID)
+                                ? errors.get(FIELD_ID)[0]
+                                : null
+                        }
+                        onChange={this.onIdChange}
+                        disabled={isNew ? false : true}
+                    >
+                        {props => <TextInput {...props} margin="normal" />}
+                    </Field>
+
+                    <Field
                         value={contact.name}
                         name="name"
                         label="Name"
-                        error={errors.get('name') ? true : false}
+                        error={errors.get(FIELD_NAME) ? true : false}
                         helperText={
-                            errors.get('name') ? errors.get('name')[0] : null
+                            errors.get(FIELD_NAME)
+                                ? errors.get(FIELD_NAME)[0]
+                                : null
                         }
-                        margin="normal"
                         onChange={this.onNameChange}
-                    />
+                    >
+                        {props => <TextInput {...props} margin="normal" />}
+                    </Field>
+
                     <Field
-                        component={TextField}
                         value={contact.yearsOfExperience}
                         name="yearsOfExperience"
                         label="Years of Experience"
-                        error={errors.get('yearsOfExperience') ? true : false}
+                        error={
+                            errors.get(FIELD_YEARS_OF_EXPERIENCE) ? true : false
+                        }
                         helperText={
-                            errors.get('yearsOfExperience')
-                                ? errors.get('yearsOfExperience')[0]
+                            errors.get(FIELD_YEARS_OF_EXPERIENCE)
+                                ? errors.get(FIELD_YEARS_OF_EXPERIENCE)[0]
                                 : null
                         }
-                        margin="normal"
-                        onChange={this.onYearsOfExperience}
-                    />
+                        onChange={this.onYearsOfExperienceChange}
+                    >
+                        {props => <NumberInput {...props} margin="normal" />}
+                    </Field>
 
                     <div className={classes.buttonBar}>
                         <Button raised color="primary" type="submit">
@@ -129,12 +161,30 @@ class ContactFormBase extends React.Component {
         );
     }
 
-    onNameChange = event => {
-        this.props.entity.setName(event.target.value);
+    onIdChange = value => {
+        const { entity: contact } = this.props;
+        contact.setId(value);
     };
 
-    onYearsOfExperience = event => {
-        this.props.entity.setYearsOfExperience(event.target.value);
+    onNameChange = value => {
+        const { entity: contact } = this.props;
+        contact.setName(value);
+    };
+
+    // Here we do a validation on each keystroke
+    @action
+    onYearsOfExperienceChange = value => {
+        const { entity: contact } = this.props;
+
+        // First set the value
+        contact.setYearsOfExperience(value);
+
+        // Validate and update the error for this field only
+        const localErrors = validate(contact, this.constraints) || {};
+        this.errors.set(
+            FIELD_YEARS_OF_EXPERIENCE,
+            localErrors[FIELD_YEARS_OF_EXPERIENCE]
+        );
     };
 
     @action

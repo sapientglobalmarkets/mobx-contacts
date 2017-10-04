@@ -69,6 +69,11 @@ export class Contact {
     }
 
     @action
+    setId = id => {
+        this.id = id;
+    };
+
+    @action
     setName = name => {
         this.name = name;
     };

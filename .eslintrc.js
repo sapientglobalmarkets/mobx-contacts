@@ -27,7 +27,7 @@ module.exports = {
         'comma-style': 'error',
         curly: 'error',
         'dot-notation': 'error',
-        eqeqeq: 'error',
+        eqeqeq: ['error', 'smart'],
         'eol-last': 'error',
         'key-spacing': 'error',
         'keyword-spacing': 'error',
