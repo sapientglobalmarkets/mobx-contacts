@@ -7,8 +7,8 @@ import TextField from 'material-ui/TextField';
 import moment from 'moment';
 import 'moment-timezone';
 import PropTypes from 'prop-types';
-import Select from 'react-select';
 import { StringUtils } from 'shared/utils';
+import { SelectControl } from './select-control';
 
 const styles = {
     root: {
@@ -109,7 +109,7 @@ class DateTimeTzBase extends React.Component {
                     value={datePart}
                     label={label}
                     error={errorText ? true : false}
-                    helperText={errorText ? errorText : null}
+                    helperText={errorText}
                     className={classes.dateStyle}
                     placeholder="YYYY-MM-DD"
                     margin="normal"
@@ -131,21 +131,18 @@ class DateTimeTzBase extends React.Component {
                     onKeyPress={this.onDateTimeKeyPress}
                     onBlur={this.onDateTimeChanged}
                 />
-                {hideTimezone
-                    ? null
-                    : <div className={classes.tzStyle}>
-                          <InputLabel shrink>Timezone</InputLabel>
-                          <Select
-                              value={timezone}
-                              options={tzOptions}
-                              valueKey="id"
-                              labelKey="displayName"
-                              autoBlur={true}
-                              autosize={true}
-                              clearable={false}
-                              onChange={this.onTimezoneChanged}
-                          />
-                      </div>}
+                {hideTimezone ? null : (
+                    <div className={classes.tzStyle}>
+                        <InputLabel shrink>Timezone</InputLabel>
+                        <SelectControl
+                            value={timezone}
+                            options={tzOptions}
+                            valueKey="id"
+                            labelKey="displayName"
+                            onChange={this.onTimezoneChanged}
+                        />
+                    </div>
+                )}
             </div>
         );
     }
@@ -163,10 +160,10 @@ class DateTimeTzBase extends React.Component {
         onChange(this.computeDate(datePart, timePart, timezone), timezone);
     };
 
-    onTimezoneChanged = option => {
+    onTimezoneChanged = value => {
         const { onChange } = this.props;
         const { datePart, timePart } = this.state;
-        const timezone = option.value;
+        const timezone = value;
 
         // Validate timezone
         if (moment.tz.names().indexOf(timezone) < 0) {
@@ -183,7 +180,9 @@ class DateTimeTzBase extends React.Component {
         }
 
         return timezone
-            ? moment(date).tz(timezone).format('YYYY-MM-DD')
+            ? moment(date)
+                  .tz(timezone)
+                  .format('YYYY-MM-DD')
             : moment(date).format('YYYY-MM-DD');
     }
 
@@ -193,7 +192,9 @@ class DateTimeTzBase extends React.Component {
         }
 
         return timezone
-            ? moment(date).tz(timezone).format('hh:mm A')
+            ? moment(date)
+                  .tz(timezone)
+                  .format('hh:mm A')
             : moment(date).format('hh:mm A');
     }
 

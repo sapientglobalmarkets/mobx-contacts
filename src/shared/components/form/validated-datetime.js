@@ -7,7 +7,7 @@ import { action } from 'mobx';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
-import { DateTimeTz } from 'shared/components';
+import { DateTimeTz } from './datetimetz';
 
 @observer
 export class ValidatedDateTime extends React.Component {

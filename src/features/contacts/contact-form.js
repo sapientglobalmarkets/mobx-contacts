@@ -4,14 +4,15 @@ import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import { action, observable, ObservableMap } from 'mobx';
+import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import {
     ResultPanel,
     ValidatedDateTime,
-    ValidatedInput,
     ValidatedNumber,
-    ValidatedSelect
+    ValidatedSelect,
+    ValidatedText
 } from 'shared/components';
 import { IndustryType } from 'shared/domain';
 
@@ -53,6 +54,7 @@ const styles = theme => ({
     }
 });
 
+@observer
 class ContactFormBase extends React.Component {
     static propTypes = {
         entity: PropTypes.object,
@@ -145,17 +147,17 @@ class ContactFormBase extends React.Component {
 
                     <ResultPanel result={result} />
 
-                    <ValidatedInput
+                    <ValidatedText
                         entity={contact}
                         attr="id"
                         name="id"
-                        label="Id"
+                        label="Contact Id"
                         constraints={constraints}
                         errors={errors}
                         disabled={isNew ? false : true}
                         margin="normal"
                     />
-                    <ValidatedInput
+                    <ValidatedText
                         entity={contact}
                         attr="name"
                         name="name"
@@ -164,7 +166,7 @@ class ContactFormBase extends React.Component {
                         errors={errors}
                         margin="normal"
                     />
-                    <ValidatedInput
+                    <ValidatedText
                         entity={contact}
                         attr="company"
                         name="company"
@@ -173,7 +175,7 @@ class ContactFormBase extends React.Component {
                         errors={errors}
                         margin="normal"
                     />
-                    <ValidatedInput
+                    <ValidatedText
                         entity={contact}
                         attr="email"
                         name="email"
@@ -182,7 +184,7 @@ class ContactFormBase extends React.Component {
                         errors={errors}
                         margin="normal"
                     />
-                    <ValidatedInput
+                    <ValidatedText
                         entity={contact}
                         attr="phone"
                         name="phone"
@@ -192,7 +194,7 @@ class ContactFormBase extends React.Component {
                         margin="normal"
                     />
                     <div className={classes.row}>
-                        <ValidatedInput
+                        <ValidatedText
                             entity={contact}
                             attr="address.street"
                             name="street"
@@ -202,7 +204,7 @@ class ContactFormBase extends React.Component {
                             margin="normal"
                             className={classes.street}
                         />
-                        <ValidatedInput
+                        <ValidatedText
                             entity={contact}
                             attr="address.city"
                             name="city"
@@ -212,7 +214,7 @@ class ContactFormBase extends React.Component {
                             margin="normal"
                             className={classes.city}
                         />
-                        <ValidatedInput
+                        <ValidatedText
                             entity={contact}
                             attr="address.state"
                             name="state"
@@ -222,7 +224,7 @@ class ContactFormBase extends React.Component {
                             margin="normal"
                             className={classes.state}
                         />
-                        <ValidatedInput
+                        <ValidatedText
                             entity={contact}
                             attr="address.zip"
                             name="zip"
@@ -262,7 +264,7 @@ class ContactFormBase extends React.Component {
                             margin="normal"
                         />
                     </div>
-                    <ValidatedInput
+                    <ValidatedText
                         entity={contact}
                         attr="notes"
                         name="notes"
