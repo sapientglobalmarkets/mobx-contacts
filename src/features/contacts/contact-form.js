@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import {
     ResultPanel,
+    ValidatedDateTime,
     ValidatedNumber,
     ValidatedSelect,
     ValidatedText
@@ -28,6 +29,21 @@ const styles = theme => ({
     row: {
         display: 'flex',
         flexDirection: 'row'
+    },
+    street: {
+        flex: 4,
+        marginRight: theme.spacing.unit * 2
+    },
+    city: {
+        flex: 2,
+        marginRight: theme.spacing.unit * 2
+    },
+    state: {
+        flex: 2,
+        marginRight: theme.spacing.unit * 2
+    },
+    zip: {
+        flex: 1
     },
     industry: {
         width: 250,
@@ -66,13 +82,32 @@ class ContactFormBase extends React.Component {
             name: {
                 presence: true
             },
+            company: {},
+            email: {
+                email: true
+            },
+            phone: {},
+            'address.street': {
+                format: {
+                    pattern: '^[0-9]+ .+$',
+                    message: '^The street must be a number followed by a name'
+                }
+            },
+            'address.city': {},
+            'address.state': {},
+            'address.zip': {},
+            lastContacted: {
+                datetime: true
+            },
+            industry: {},
             yearsOfExperience: {
                 numericality: {
                     onlyInteger: true,
                     greaterThanOrEqualTo: 0,
                     lessThanOrEqualTo: 50
                 }
-            }
+            },
+            notes: {}
         };
     }
 
@@ -116,7 +151,7 @@ class ContactFormBase extends React.Component {
                         entity={contact}
                         attr="id"
                         name="id"
-                        label="Id"
+                        label="Contact Id"
                         constraints={constraints}
                         errors={errors}
                         disabled={isNew ? false : true}
@@ -130,6 +165,83 @@ class ContactFormBase extends React.Component {
                         constraints={constraints}
                         errors={errors}
                         margin="normal"
+                    />
+                    <ValidatedText
+                        entity={contact}
+                        attr="company"
+                        name="company"
+                        label="Company"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                    />
+                    <ValidatedText
+                        entity={contact}
+                        attr="email"
+                        name="email"
+                        label="Email"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                    />
+                    <ValidatedText
+                        entity={contact}
+                        attr="phone"
+                        name="phone"
+                        label="Phone"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                    />
+                    <div className={classes.row}>
+                        <ValidatedText
+                            entity={contact}
+                            attr="address.street"
+                            name="street"
+                            label="Street"
+                            constraints={constraints}
+                            errors={errors}
+                            margin="normal"
+                            className={classes.street}
+                        />
+                        <ValidatedText
+                            entity={contact}
+                            attr="address.city"
+                            name="city"
+                            label="City"
+                            constraints={constraints}
+                            errors={errors}
+                            margin="normal"
+                            className={classes.city}
+                        />
+                        <ValidatedText
+                            entity={contact}
+                            attr="address.state"
+                            name="state"
+                            label="State"
+                            constraints={constraints}
+                            errors={errors}
+                            margin="normal"
+                            className={classes.state}
+                        />
+                        <ValidatedText
+                            entity={contact}
+                            attr="address.zip"
+                            name="zip"
+                            label="Zip"
+                            constraints={constraints}
+                            errors={errors}
+                            margin="normal"
+                            className={classes.zip}
+                        />
+                    </div>
+                    <ValidatedDateTime
+                        entity={contact}
+                        attr="lastContacted"
+                        label="Last Contacted"
+                        timezone="America/New_York"
+                        constraints={constraints}
+                        errors={errors}
                     />
                     <div className={classes.row}>
                         <ValidatedSelect
@@ -152,6 +264,15 @@ class ContactFormBase extends React.Component {
                             margin="normal"
                         />
                     </div>
+                    <ValidatedText
+                        entity={contact}
+                        attr="notes"
+                        name="notes"
+                        label="Notes"
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                    />
 
                     <div className={classes.buttonBar}>
                         <Button raised color="primary" type="submit">

@@ -3,6 +3,7 @@ export { ResultPanel } from './basics/result-panel';
 export { Titlebar } from './basics/titlebar';
 export { VerticalDivider } from './basics/vertical-divider';
 
+export { ValidatedDateTime } from './form/validated-datetime';
 export {
     ValidatedField,
     ValidatedNumber,

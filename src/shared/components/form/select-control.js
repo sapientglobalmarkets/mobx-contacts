@@ -1,7 +1,7 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "[onChange|onBlur]" }]*/
 
 import React from 'react';
-import { FormControl } from 'material-ui/Form';
+import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
@@ -18,6 +18,8 @@ const styles = theme => ({
 class RawSelectControlBase extends React.Component {
     static propTypes = {
         label: PropTypes.string,
+        error: PropTypes.bool,
+        helperText: PropTypes.string,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
         optionIdAttr: PropTypes.string,
         optionNameAttr: PropTypes.string,
@@ -35,6 +37,8 @@ class RawSelectControlBase extends React.Component {
         const {
             classes,
             label,
+            error,
+            helperText,
             options,
             optionIdAttr,
             optionNameAttr,
@@ -44,7 +48,7 @@ class RawSelectControlBase extends React.Component {
         } = this.props;
 
         return (
-            <FormControl className={classes.root}>
+            <FormControl className={classes.root} error={error}>
                 <InputLabel>{label}</InputLabel>
                 <Select onChange={this.onChange} input={<Input />} {...rest}>
                     {isNullable ? (
@@ -61,6 +65,7 @@ class RawSelectControlBase extends React.Component {
                         </MenuItem>
                     ))}
                 </Select>
+                <FormHelperText>{helperText}</FormHelperText>
             </FormControl>
         );
     }
