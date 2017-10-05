@@ -7,19 +7,6 @@ import PropTypes from 'prop-types';
  * are passed on to the child component, which must adapt to the interface.
  */
 export class Field extends React.Component {
-    static defaultProps = {
-        value: null,
-        name: null,
-        label: null,
-        error: false,
-        helperText: null,
-        visible: true,
-        disabled: false,
-        children: null,
-        onChange: null,
-        onBlur: null
-    };
-
     // ----- Interface for the parent form -----
     // 'name' property is used when sending data in a form submission.
     // See https://stackoverflow.com/questions/1397592/difference-between-id-and-name-attributes-in-html
@@ -38,6 +25,19 @@ export class Field extends React.Component {
         children: PropTypes.func.isRequired,
         onChange: PropTypes.func.isRequired,
         onBlur: PropTypes.func
+    };
+
+    static defaultProps = {
+        value: null,
+        name: null,
+        label: null,
+        error: false,
+        helperText: null,
+        visible: true,
+        disabled: false,
+        children: null,
+        onChange: null,
+        onBlur: null
     };
 
     render() {

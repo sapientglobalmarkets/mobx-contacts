@@ -3,7 +3,6 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
-
 import { withValueTransform } from './with-value-transform';
 
 class RawTextInput extends React.Component {

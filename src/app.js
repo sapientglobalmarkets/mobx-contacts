@@ -3,26 +3,24 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import blue from 'material-ui/colors/blue';
 import pink from 'material-ui/colors/pink';
 import red from 'material-ui/colors/red';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import createPalette from 'material-ui/styles/palette';
-import createMuiTheme from 'material-ui/styles/theme';
-import createTypography from 'material-ui/styles/typography';
 import { Provider } from 'mobx-react';
 import { contactStore } from 'shared/stores/contact.store';
 import { Shell } from './shell';
 
 export class App extends React.Component {
     render() {
-        const palette = createPalette({
+        const palette = {
             primary: blue,
             accent: pink,
             error: red,
             type: 'light'
-        });
+        };
 
-        const typography = createTypography(palette, {
+        const typography = {
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif'
-        });
+        };
 
         const theme = createMuiTheme({ palette, typography });
         const stores = { contactStore };

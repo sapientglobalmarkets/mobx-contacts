@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { Field } from './field';
 import { NumberInput, TextInput } from './text-based-inputs';
+import { SelectInput } from './select-input';
 
 @observer
 export class ValidatedField extends React.Component {
@@ -70,6 +71,14 @@ export function ValidatedNumber(props) {
     return (
         <ValidatedField {...props}>
             {props => <NumberInput {...props} />}
+        </ValidatedField>
+    );
+}
+
+export function ValidatedSelect(props) {
+    return (
+        <ValidatedField {...props}>
+            {props => <SelectInput {...props} />}
         </ValidatedField>
     );
 }

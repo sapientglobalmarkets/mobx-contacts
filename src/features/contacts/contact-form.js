@@ -1,4 +1,5 @@
 import React from 'react';
+import values from 'lodash/values';
 import Button from 'material-ui/Button';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
@@ -6,7 +7,13 @@ import { action, observable, ObservableMap } from 'mobx';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
-import { ResultPanel, ValidatedNumber, ValidatedText } from 'shared/components';
+import {
+    ResultPanel,
+    ValidatedNumber,
+    ValidatedSelect,
+    ValidatedText
+} from 'shared/components';
+import { IndustryType } from 'shared/domain';
 
 const styles = theme => ({
     root: {
@@ -17,6 +24,14 @@ const styles = theme => ({
     form: {
         display: 'flex',
         flexDirection: 'column'
+    },
+    row: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    industry: {
+        width: 250,
+        marginRight: theme.spacing.unit * 2
     },
     buttonBar: {
         marginTop: '26px'
@@ -107,7 +122,6 @@ class ContactFormBase extends React.Component {
                         disabled={isNew ? false : true}
                         margin="normal"
                     />
-
                     <ValidatedText
                         entity={contact}
                         attr="name"
@@ -117,16 +131,27 @@ class ContactFormBase extends React.Component {
                         errors={errors}
                         margin="normal"
                     />
-
-                    <ValidatedNumber
-                        entity={contact}
-                        attr="yearsOfExperience"
-                        name="yearsOfExperience"
-                        label="Years of Experience"
-                        constraints={constraints}
-                        errors={errors}
-                        margin="normal"
-                    />
+                    <div className={classes.row}>
+                        <ValidatedSelect
+                            className={classes.industry}
+                            entity={contact}
+                            attr="industry"
+                            label="Industry"
+                            options={values(IndustryType)}
+                            isNullable={true}
+                            constraints={constraints}
+                            errors={errors}
+                        />
+                        <ValidatedNumber
+                            entity={contact}
+                            attr="yearsOfExperience"
+                            name="yearsOfExperience"
+                            label="Years of Experience"
+                            constraints={constraints}
+                            errors={errors}
+                            margin="normal"
+                        />
+                    </div>
 
                     <div className={classes.buttonBar}>
                         <Button raised color="primary" type="submit">

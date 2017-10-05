@@ -6,6 +6,7 @@ export { VerticalDivider } from './basics/vertical-divider';
 export {
     ValidatedField,
     ValidatedNumber,
+    ValidatedSelect,
     ValidatedText
 } from './form/validated-fields';
 

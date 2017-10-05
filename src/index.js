@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useStrict } from 'mobx';
-import 'react-select/dist/react-select.css';
 import { App } from './app';
 import './shared/init/validation-init';
 import registerServiceWorker from './register-service-worker';
