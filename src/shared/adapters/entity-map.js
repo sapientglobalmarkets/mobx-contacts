@@ -4,7 +4,7 @@ import { action, observable, ObservableMap } from 'mobx';
 
 export class EntityMap {
     // Map of id -> viewModel
-    @observable map = new ObservableMap();
+    map = new ObservableMap();
 
     @observable isLoading = true;
 
