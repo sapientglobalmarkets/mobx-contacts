@@ -51,7 +51,8 @@ export class Field extends React.Component {
             disabled,
             children,
             onChange,
-            onBlur
+            onBlur,
+            ...rest
         } = this.props;
 
         if (!visible) {
@@ -67,7 +68,8 @@ export class Field extends React.Component {
             helperText,
             disabled,
             onChange,
-            onBlur
+            onBlur,
+            ...rest
         };
 
         return children(childProps);

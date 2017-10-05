@@ -3,9 +3,11 @@ export { ResultPanel } from './basics/result-panel';
 export { Titlebar } from './basics/titlebar';
 export { VerticalDivider } from './basics/vertical-divider';
 
-export { Field } from './form/field';
-export { NumberInput, TextInput } from './form/text-based-inputs';
-export { withValueTransform } from './form/with-value-transform';
+export {
+    ValidatedField,
+    ValidatedNumber,
+    ValidatedText
+} from './form/validated-fields';
 
 export { Master } from './master-detail/master';
 export { MasterDetail } from './master-detail/master-detail';

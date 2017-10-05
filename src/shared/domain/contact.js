@@ -1,4 +1,4 @@
-import { action, observable, runInAction } from 'mobx';
+import { observable, runInAction } from 'mobx';
 import { StringUtils } from 'shared/utils';
 import { Address } from './address';
 
@@ -67,21 +67,6 @@ export class Contact {
             this.notes
         );
     }
-
-    @action
-    setId = id => {
-        this.id = id;
-    };
-
-    @action
-    setName = name => {
-        this.name = name;
-    };
-
-    @action
-    setYearsOfExperience = yearsOfExperience => {
-        this.yearsOfExperience = yearsOfExperience;
-    };
 
     toDomainModel() {
         return {

@@ -6,7 +6,7 @@ import { action, observable, ObservableMap } from 'mobx';
 import { observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
-import { Field, NumberInput, ResultPanel, TextInput } from 'shared/components';
+import { ResultPanel, ValidatedNumber, ValidatedText } from 'shared/components';
 
 const styles = theme => ({
     root: {
@@ -22,10 +22,6 @@ const styles = theme => ({
         marginTop: '26px'
     }
 });
-
-const FIELD_ID = 'id';
-const FIELD_NAME = 'name';
-const FIELD_YEARS_OF_EXPERIENCE = 'yearsOfExperience';
 
 @observer
 class ContactFormBase extends React.Component {
@@ -81,6 +77,7 @@ class ContactFormBase extends React.Component {
             result,
             onCancel
         } = this.props;
+        const constraints = this.constraints;
         const errors = this.errors;
 
         if (!contact) {
@@ -100,53 +97,36 @@ class ContactFormBase extends React.Component {
 
                     <ResultPanel result={result} />
 
-                    <Field
-                        value={contact.id}
+                    <ValidatedText
+                        entity={contact}
+                        attr="id"
                         name="id"
                         label="Id"
-                        error={errors.get(FIELD_ID) ? true : false}
-                        helperText={
-                            errors.get(FIELD_ID)
-                                ? errors.get(FIELD_ID)[0]
-                                : null
-                        }
-                        onChange={this.onIdChange}
+                        constraints={constraints}
+                        errors={errors}
                         disabled={isNew ? false : true}
-                    >
-                        {props => <TextInput {...props} margin="normal" />}
-                    </Field>
+                        margin="normal"
+                    />
 
-                    <Field
-                        value={contact.name}
+                    <ValidatedText
+                        entity={contact}
+                        attr="name"
                         name="name"
                         label="Name"
-                        error={errors.get(FIELD_NAME) ? true : false}
-                        helperText={
-                            errors.get(FIELD_NAME)
-                                ? errors.get(FIELD_NAME)[0]
-                                : null
-                        }
-                        onChange={this.onNameChange}
-                    >
-                        {props => <TextInput {...props} margin="normal" />}
-                    </Field>
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                    />
 
-                    <Field
-                        value={contact.yearsOfExperience}
+                    <ValidatedNumber
+                        entity={contact}
+                        attr="yearsOfExperience"
                         name="yearsOfExperience"
                         label="Years of Experience"
-                        error={
-                            errors.get(FIELD_YEARS_OF_EXPERIENCE) ? true : false
-                        }
-                        helperText={
-                            errors.get(FIELD_YEARS_OF_EXPERIENCE)
-                                ? errors.get(FIELD_YEARS_OF_EXPERIENCE)[0]
-                                : null
-                        }
-                        onChange={this.onYearsOfExperienceChange}
-                    >
-                        {props => <NumberInput {...props} margin="normal" />}
-                    </Field>
+                        constraints={constraints}
+                        errors={errors}
+                        margin="normal"
+                    />
 
                     <div className={classes.buttonBar}>
                         <Button raised color="primary" type="submit">
@@ -160,32 +140,6 @@ class ContactFormBase extends React.Component {
             </div>
         );
     }
-
-    onIdChange = value => {
-        const { entity: contact } = this.props;
-        contact.setId(value);
-    };
-
-    onNameChange = value => {
-        const { entity: contact } = this.props;
-        contact.setName(value);
-    };
-
-    // Here we do a validation on each keystroke
-    @action
-    onYearsOfExperienceChange = value => {
-        const { entity: contact } = this.props;
-
-        // First set the value
-        contact.setYearsOfExperience(value);
-
-        // Validate and update the error for this field only
-        const localErrors = validate(contact, this.constraints) || {};
-        this.errors.set(
-            FIELD_YEARS_OF_EXPERIENCE,
-            localErrors[FIELD_YEARS_OF_EXPERIENCE]
-        );
-    };
 
     @action
     onSubmit = event => {
