@@ -5,17 +5,10 @@ import { FormControl, FormHelperText } from 'material-ui/Form';
 import Input, { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import Select from 'material-ui/Select';
-import { withStyles } from 'material-ui/styles';
 import PropTypes from 'prop-types';
 import { withValueTransform } from './with-value-transform';
 
-const styles = theme => ({
-    root: {
-        marginTop: theme.spacing.unit * 2
-    }
-});
-
-class RawSelectControlBase extends React.Component {
+class RawSelectControl extends React.Component {
     static propTypes = {
         label: PropTypes.string,
         error: PropTypes.bool,
@@ -35,7 +28,7 @@ class RawSelectControlBase extends React.Component {
 
     render() {
         const {
-            classes,
+            className,
             label,
             error,
             helperText,
@@ -43,13 +36,22 @@ class RawSelectControlBase extends React.Component {
             optionIdAttr,
             optionNameAttr,
             isNullable,
+            disabled,
+            margin,
             onChange,
             ...rest
         } = this.props;
 
         return (
-            <FormControl className={classes.root} error={error}>
-                <InputLabel>{label}</InputLabel>
+            <FormControl
+                className={className}
+                error={error}
+                disabled={disabled}
+                margin={margin}
+            >
+                <InputLabel error={error} disabled={disabled}>
+                    {label}
+                </InputLabel>
                 <Select onChange={this.onChange} input={<Input />} {...rest}>
                     {isNullable ? (
                         <MenuItem value="">
@@ -65,7 +67,9 @@ class RawSelectControlBase extends React.Component {
                         </MenuItem>
                     ))}
                 </Select>
-                <FormHelperText>{helperText}</FormHelperText>
+                <FormHelperText error={error} disabled={disabled}>
+                    {helperText}
+                </FormHelperText>
             </FormControl>
         );
     }
@@ -75,8 +79,6 @@ class RawSelectControlBase extends React.Component {
         this.props.onChange(value);
     };
 }
-
-const RawSelectControl = withStyles(styles)(RawSelectControlBase);
 
 export const SelectControl = withValueTransform(
     RawSelectControl,

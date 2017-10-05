@@ -1,7 +1,6 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "tzErrorText" }]*/
 
 import React from 'react';
-import InputLabel from 'material-ui/Input/InputLabel';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import moment from 'moment';
@@ -24,8 +23,6 @@ const styles = {
         marginRight: 10
     },
     tzStyle: {
-        display: 'flex',
-        flexDirection: 'column',
         marginRight: 10
     }
 };
@@ -101,7 +98,7 @@ class DateTimeTzBase extends React.Component {
         const { datePart, timePart, tzErrorText } = this.state;
         const tzOptions = moment.tz
             .names()
-            .map(name => ({ value: name, label: name }));
+            .map(name => ({ id: name, name: name }));
 
         return (
             <div className={classes.root}>
@@ -132,16 +129,14 @@ class DateTimeTzBase extends React.Component {
                     onBlur={this.onDateTimeChanged}
                 />
                 {hideTimezone ? null : (
-                    <div className={classes.tzStyle}>
-                        <InputLabel shrink>Timezone</InputLabel>
-                        <SelectControl
-                            value={timezone}
-                            options={tzOptions}
-                            valueKey="id"
-                            labelKey="displayName"
-                            onChange={this.onTimezoneChanged}
-                        />
-                    </div>
+                    <SelectControl
+                        value={timezone}
+                        label="Timezone"
+                        className={classes.tzStyle}
+                        options={tzOptions}
+                        margin="normal"
+                        onChange={this.onTimezoneChanged}
+                    />
                 )}
             </div>
         );

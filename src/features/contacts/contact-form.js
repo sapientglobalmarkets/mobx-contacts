@@ -253,6 +253,7 @@ class ContactFormBase extends React.Component {
                             isNullable={true}
                             constraints={constraints}
                             errors={errors}
+                            margin="normal"
                         />
                         <ValidatedNumber
                             entity={contact}
