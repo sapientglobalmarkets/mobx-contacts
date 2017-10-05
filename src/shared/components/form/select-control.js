@@ -15,7 +15,7 @@ const styles = theme => ({
     }
 });
 
-class RawSelectInputBase extends React.Component {
+class RawSelectControlBase extends React.Component {
     static propTypes = {
         label: PropTypes.string,
         options: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -71,10 +71,10 @@ class RawSelectInputBase extends React.Component {
     };
 }
 
-const RawSelectInput = withStyles(styles)(RawSelectInputBase);
+const RawSelectControl = withStyles(styles)(RawSelectControlBase);
 
-export const SelectInput = withValueTransform(
-    RawSelectInput,
+export const SelectControl = withValueTransform(
+    RawSelectControl,
     value => (value == null ? '' : String(value)),
     value => (value === '' ? null : value)
 );
