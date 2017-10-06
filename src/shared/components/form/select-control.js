@@ -59,9 +59,7 @@ class RawSelectControl extends React.Component {
                 ) : null}
                 <Select onChange={this.onChange} input={<Input />} {...rest}>
                     {isNullable ? (
-                        <MenuItem value="">
-                            <em>{nullOptionName}</em>
-                        </MenuItem>
+                        <MenuItem value="">{nullOptionName}</MenuItem>
                     ) : null}
                     {options.map(option => (
                         <MenuItem
