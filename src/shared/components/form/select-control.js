@@ -17,13 +17,15 @@ class RawSelectControl extends React.Component {
         optionIdAttr: PropTypes.string,
         optionNameAttr: PropTypes.string,
         isNullable: PropTypes.bool,
+        nullOptionName: PropTypes.string,
         onChange: PropTypes.func
     };
 
     static defaultProps = {
         optionIdAttr: 'id',
         optionNameAttr: 'name',
-        isNullable: false
+        isNullable: false,
+        nullOptionName: 'None'
     };
 
     render() {
@@ -36,6 +38,7 @@ class RawSelectControl extends React.Component {
             optionIdAttr,
             optionNameAttr,
             isNullable,
+            nullOptionName,
             disabled,
             margin,
             onChange,
@@ -49,13 +52,15 @@ class RawSelectControl extends React.Component {
                 disabled={disabled}
                 margin={margin}
             >
-                <InputLabel error={error} disabled={disabled}>
-                    {label}
-                </InputLabel>
+                {label ? (
+                    <InputLabel error={error} disabled={disabled}>
+                        {label}
+                    </InputLabel>
+                ) : null}
                 <Select onChange={this.onChange} input={<Input />} {...rest}>
                     {isNullable ? (
                         <MenuItem value="">
-                            <em>None</em>
+                            <em>{nullOptionName}</em>
                         </MenuItem>
                     ) : null}
                     {options.map(option => (
@@ -67,9 +72,11 @@ class RawSelectControl extends React.Component {
                         </MenuItem>
                     ))}
                 </Select>
-                <FormHelperText error={error} disabled={disabled}>
-                    {helperText}
-                </FormHelperText>
+                {helperText ? (
+                    <FormHelperText error={error} disabled={disabled}>
+                        {helperText}
+                    </FormHelperText>
+                ) : null}
             </FormControl>
         );
     }
